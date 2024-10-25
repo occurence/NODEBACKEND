@@ -4,12 +4,20 @@ import cors from 'cors';
 
 import contactsRouter from './routes/api/contactsRouter.js';
 import usersRouter from './routes/api/usersRouter.js';
+import { swaggerSpecs, swaggerUi } from './swaggerConfig.js';
 
 const app = express();
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
+const { PORT } = process.env;//
 
 app.use(logger(formatsLogger));
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  // origin: `http://localhost:${PORT}`,
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 app.use(express.json());
 
 
@@ -17,7 +25,7 @@ app.use(express.json());
 
 
 app.use(express.static("public"));
-
+app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 
 

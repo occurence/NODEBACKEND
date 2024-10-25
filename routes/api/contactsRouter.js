@@ -5,6 +5,27 @@ import { authenticateToken } from '../../middlewares/auth.js';
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * /api/contacts:
+ *  get:
+ *      summary: Retrieve a list of contacts
+ *      tags: [Contacts]
+ *      security:
+ *          - bearerAuth: []
+ *      responses:
+ *          200:
+ *              description: Successfully retrieved list of contacts
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          type: array
+ *                          items:
+ *                              $ref: '#/components/schemas/Contact'
+ *          400:
+ *              description: Unauthorized
+ */
+
 router.get('/', authenticateToken, getAllContacts);
 router.get('/:contactId', authenticateToken, getContactById);
 router.post('/', authenticateToken, addContact);
@@ -13,10 +34,3 @@ router.put('/:contactId', authenticateToken, updateContact);
 router.patch('/:contactId/favorite', authenticateToken, updateStatusContact);
 
 export default router;
-
-// router.get('/', getAllContacts);
-// router.get('/:contactId', getContactById);
-// router.post('/', addContact);
-// router.delete('/:contactId', deleteContact);
-// router.put('/:contactId', updateContact);
-// router.patch('/:contactId/favorite', authenticateToken, updateStatusContact);

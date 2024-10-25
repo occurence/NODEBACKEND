@@ -6,7 +6,7 @@ import { signupValidation, subscriptionValidation, emailValidation } from '../va
 import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 import gravatar from 'gravatar';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { Jimp } from 'jimp';
 import { sendEmail } from '../helpers/sendEmail.js';
 import { nanoid } from 'nanoid';
